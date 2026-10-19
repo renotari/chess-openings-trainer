@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Opening Trainer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">Opening Trainer</div>
+    <nav id="openings" class="openings" aria-label="Openings"></nav>
+  </header>
+
+  <main class="layout">
+    <section class="board-col">
+      <div id="board"></div>
+      <div class="controls">
+        <button id="btn-hint" title="Shortcut: H">Hint</button>
+        <button id="btn-answer">Show answer</button>
+        <button id="btn-restart" title="Shortcut: R">Restart</button>
+        <button id="btn-next" class="primary" title="Shortcut: N">Next line</button>
+      </div>
+      <div id="moves" class="moves"></div>
+    </section>
+
+    <aside class="panel">
+      <div class="panel-head">
+        <div id="mode" class="seg" role="group" aria-label="Mode">
+          <button data-mode="learn">Learn</button>
+          <button data-mode="practice">Practice</button>
+        </div>
+        <select id="line-select" aria-label="Line"></select>
+      </div>
+      <div id="status" class="status"></div>
+      <div id="feed" class="feed" aria-live="polite"></div>
+      <details class="box">
+        <summary>Lines &amp; progress</summary>
+        <div id="lines"></div>
+      </details>
+      <details class="box">
+        <summary>About this opening</summary>
+        <p id="intro"></p>
+      </details>
+    </aside>
+  </main>
+
+  <script src="vendor/chess.min.js"></script>
+  <script src="data/london.js"></script>
+  <script src="data/caro-kann.js"></script>
+  <script src="data/kings-indian.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/analysis.js"></script>
+  <script src="js/trainer.js"></script>
+</body>
+</html>
