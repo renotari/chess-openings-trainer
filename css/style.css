@@ -172,6 +172,9 @@ button.primary:hover { filter: brightness(1.08); }
 .seg button { border: 0; border-radius: 0; background: var(--surface); }
 .seg button + button { border-left: 1px solid var(--border); }
 .seg button.active { background: var(--accent); color: var(--accent-text); }
+.toggle { display: inline-flex; gap: 6px; align-items: center; font-size: 14px; color: var(--muted); cursor: pointer; user-select: none; }
+.toggle[hidden] { display: none; }
+.toggle input { accent-color: var(--accent); margin: 0; }
 
 .status {
   font-weight: 600;
@@ -212,6 +215,17 @@ button.primary:hover { filter: brightness(1.08); }
 .entry.alt .entry-title { color: var(--alt); }
 .entry.hint, .entry.info { border-left-color: var(--info); background: var(--info-bg); }
 .entry.done { border-left-color: var(--good); }
+.entry.quiz { border-left-color: var(--info); }
+.quiz-opts { display: grid; gap: 6px; margin-top: 8px; }
+.quiz-opt { text-align: left; display: flex; gap: 10px; align-items: baseline; }
+.quiz-opt b { color: var(--muted); }
+.quiz-opt:disabled { cursor: default; opacity: .65; }
+.quiz-opt:disabled:hover { background: var(--surface); }
+.quiz-opt.right { opacity: 1; border-color: var(--good); background: var(--good-bg); }
+.quiz-opt.wrong { opacity: 1; border-color: var(--bad); background: var(--bad-bg); }
+.quiz-verdict { font-weight: 600; }
+.quiz-verdict.right { color: var(--good); }
+.quiz-verdict.wrong { color: var(--bad); }
 .feed-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
 
 .box {
@@ -223,7 +237,8 @@ button.primary:hover { filter: brightness(1.08); }
 .box summary { cursor: pointer; font-weight: 600; }
 .box p { margin: 8px 0 4px; }
 .line-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--border); }
-.line-row:first-child { border-top: 0; margin-top: 6px; }
+.line-group { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); margin: 12px 0 2px; }
+.line-group + .line-row { border-top: 0; }
 .line-info { flex: 1; min-width: 0; }
 .line-name { font-weight: 500; }
 .line-meta { font-size: 12px; color: var(--muted); display: flex; gap: 8px; align-items: center; }
