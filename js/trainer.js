@@ -169,7 +169,7 @@
     const line = lineById(run.target);
     if (store.settings.mode === 'learn') {
       const extra = kindOf(line) === 'trap' ? ' In this line the opponent makes a typical mistake: learn how to punish it.' : '';
-      addFeed('info', `Learning: ${line.name}`, 'The book move is shown with a green arrow and explained before you play it. Switch to Practice to test yourself without hints.' + extra);
+      addFeed('info', `Learning: ${line.name}`, 'The book move is shown with a green arrow and explained before you play it, and key moves come with a "why?" question. Switch to Practice to test yourself without hints.' + extra);
     } else {
       const extra = kindOf(line) === 'trap' ? ' Somewhere in this line your opponent goes wrong: spot it and punish it.'
         : store.settings.surprise && kindOf(line) === 'main' ? ' Stay alert: the opponent may leave the main line.' : '';
@@ -305,7 +305,8 @@
   // ---------- "why?" questions ----------
   function shouldQuiz(path) {
     const q = rep.quizzes && rep.quizzes[path];
-    if (!q || store.settings.mode !== 'practice' || run.revealed) return null;
+    // Questions belong to Learn mode: in Practice they broke the flow of playing from memory.
+    if (!q || store.settings.mode !== 'learn') return null;
     const s = quizStats(rep.id, path);
     // Questions you keep getting right come back only now and then.
     if (s.streak >= 2 && Math.random() >= 0.25) return null;
@@ -320,7 +321,7 @@
     setStatus('Answer the question to continue', 'turn');
     const opts = order.map((oi, i) => `<button class="quiz-opt" data-opt="${i}"><b>${i + 1}</b> ${esc(q.options[oi].text)}</button>`).join('');
     addFeed('quiz', `❓ ${q.q}`, `<div class="quiz-opts">${opts}</div>`, true);
-    run.quiz.el = $('feed').lastElementChild;
+    run.quiz.el = $('feed').firstElementChild;
   }
 
   function answerQuiz(i) {
@@ -344,7 +345,7 @@
       : `<p class="quiz-verdict wrong">✗ Not quite.</p><p>${esc(chosen.why)}</p><p><b>Answer:</b> ${esc(correct.text)}. ${esc(correct.why)}</p>`;
     if (!chosen.ok) html += '<div class="feed-actions"><button class="primary" data-act="continue">Continue</button></div>';
     z.el.insertAdjacentHTML('beforeend', html);
-    $('feed').scrollTop = $('feed').scrollHeight;
+    $('feed').scrollTop = 0;
     if (chosen.ok) later(continueQuiz, OPP_DELAY);
   }
 
@@ -413,8 +414,9 @@
     const bodyHtml = !body ? '' : bodyIsHtml ? body : `<p>${esc(body)}</p>`;
     el.innerHTML = `<div class="entry-title">${esc(title)}</div>${bodyHtml}`;
     const feed = $('feed');
-    feed.appendChild(el);
-    feed.scrollTop = feed.scrollHeight;
+    // newest entry on top, so the latest comment is always in view
+    feed.prepend(el);
+    feed.scrollTop = 0;
   }
 
   function renderMoves() {

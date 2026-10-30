@@ -16,7 +16,7 @@ Progress is saved in the browser's local storage.
   taken back so you can try again. Two misses at the same position reveal the answer.
 - Moves that are fine but not part of the repertoire are marked as *playable* (yellow) and don't
   count as mistakes.
-- **Why? questions**: in Practice, key moves and the end of each line come with a multiple-choice
+- **Why? questions**: in Learn mode, key moves and the end of each line come with a multiple-choice
   question about the idea behind the move or the plan. Every answer, right or wrong, is explained.
   Questions you keep getting right come back only now and then.
 - **Sidelines and traps**: besides the main lines, each opening has sidelines (typical deviations)
@@ -25,9 +25,8 @@ Progress is saved in the browser's local storage.
 - **Surprise me** (Practice): a main-line run sometimes turns into one of the sidelines or traps
   that branch off it, the way real opponents leave the book.
 - **Smart pick** chooses lines with a simple spaced-repetition scheme: each line has a mastery
-  level 0–5. A perfect run (right moves and right answers) raises it by 1, right moves with a
-  missed question leave it unchanged, and a run with mistakes or hints drops it by 2. Weaker lines
-  come up more often.
+  level 0–5. A perfect Practice run raises it by 1, and a run with mistakes or hints drops it by 2.
+  Weaker lines come up more often.
 - Shortcuts: `H` hint, `R` restart line, `N` next line, `1`–`4` answer a question, `Enter` continue.
 
 Mistake explanations come from two sources: hand-written ones in the repertoire files, and an
@@ -37,7 +36,7 @@ and early flank/f-pawn moves.
 
 ## Repertoires
 
-`data/london.js` (White), `data/caro-kann.js` and `data/kings-indian.js` (Black). Each file has:
+`data/london.js` and `data/italian.js` (White), `data/caro-kann.js` and `data/kings-indian.js` (Black). Each file has:
 
 - `lines`: the moves of each line in SAN, plus the `plan` shown when the line is complete.
   A line must end on your own move. `kind` is `"sideline"` or `"trap"` (main lines leave it out);
